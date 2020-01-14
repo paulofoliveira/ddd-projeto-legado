@@ -1,6 +1,4 @@
-create database PackageDelivery
-go
-USE PackageDelivery
+USE DDDLegacyProjects
 GO
 /****** Object:  Table [dbo].[ADDR_TBL]    Script Date: 1/16/2018 11:34:47 AM ******/
 SET ANSI_NULLS ON
