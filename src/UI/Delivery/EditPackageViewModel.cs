@@ -66,8 +66,15 @@ namespace PackageDelivery.Delivery
         {
             //CostEstimate = (Amount1 + Amount2 + Amount3 + Amount4) * 40;
 
-            CostEstimate = (double)_estimateCalculator.Calculate(_delivery.NMB_CLM, _product1?.NMB_CM, Amount1, _product2?.NMB_CM, Amount2, _product3?.NMB_CM, Amount3, _product4?.NMB_CM, Amount4);
+            var estimateOrError = _estimateCalculator.Calculate(_delivery.NMB_CLM, _product1?.NMB_CM, Amount1, _product2?.NMB_CM, Amount2, _product3?.NMB_CM, Amount3, _product4?.NMB_CM, Amount4);
 
+            if (estimateOrError.IsFailure)
+            {
+                CustomMessageBox.ShowError(estimateOrError.Error);
+                return;
+            }
+
+            CostEstimate = (double)estimateOrError.Value;
             Notify(nameof(CostEstimate));
         }
 

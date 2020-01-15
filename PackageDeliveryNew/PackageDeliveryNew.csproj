@@ -47,7 +47,9 @@
   <ItemGroup>
     <Compile Include="Acl\DeliveryRepository.cs" />
     <Compile Include="Acl\ProductRepository.cs" />
+    <Compile Include="Common\Contracts.cs" />
     <Compile Include="Common\Entity.cs" />
+    <Compile Include="Common\Result.cs" />
     <Compile Include="Common\ValueObject.cs" />
     <Compile Include="Deliveries\Address.cs" />
     <Compile Include="Deliveries\Delivery.cs" />

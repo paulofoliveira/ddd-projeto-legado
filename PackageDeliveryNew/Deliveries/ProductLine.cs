@@ -7,11 +7,14 @@ namespace PackageDeliveryNew.Deliveries
     {
         public ProductLine(Product product, int amount)
         {
+            Contracts.Require(product != null);
+            Contracts.Require(amount >= 0);
+
             Product = product;
             Amount = amount;
         }
 
-        public Product Product { get;}
+        public Product Product { get; }
         public int Amount { get; }
 
         protected override IEnumerable<object> GetEqualityComponents()

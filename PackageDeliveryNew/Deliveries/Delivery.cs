@@ -11,6 +11,9 @@ namespace PackageDeliveryNew.Deliveries
         private const double NonConditionalCharge = 20;
         public Delivery(int id, Address address) : base(id)
         {
+            Contracts.Require(id >= 0);
+            Contracts.Require(address != null);
+
             Address = address;
         }
 
@@ -18,11 +21,14 @@ namespace PackageDeliveryNew.Deliveries
 
         public decimal GetEstimate(double distanceInMiles, List<ProductLine> productLines)
         {
-            if (distanceInMiles < 0)
-                throw new Exception("Invalid distance.");
+            Contracts.Require(distanceInMiles >= 0, "Invalid distance.");
+            Contracts.Require(productLines.Count > 0 && productLines.Count <= 4, "Invalid product line count.");
 
-            if (productLines.Count == 0 || productLines.Count > 4)
-                throw new Exception("Invalid product line count.");
+            //if (distanceInMiles < 0)
+            //    throw new Exception("Invalid distance.");
+
+            //if (productLines.Count == 0 || productLines.Count > 4)
+            //    throw new Exception("Invalid product line count.");
 
             var totalWeightInPounds = productLines.Sum(p => p.Product.WeightInPounds * p.Amount);
             var estimate = totalWeightInPounds * distanceInMiles * PricePerMilePerPound + NonConditionalCharge;

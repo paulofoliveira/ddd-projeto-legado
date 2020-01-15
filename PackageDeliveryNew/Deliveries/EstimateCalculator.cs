@@ -1,4 +1,5 @@
 ﻿using PackageDeliveryNew.Acl;
+using PackageDeliveryNew.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,10 +20,10 @@ namespace PackageDeliveryNew.Deliveries
             _deliveryRepository = new DeliveryRepository();
             _addressResolver = new AddressResolver();
         }
-        public decimal Calculate(int deliveryId, int? product1Id, int amount1, int? product2Id, int amount2, int? product3Id, int amount3, int? product4Id, int amount4)
+        public Result<decimal> Calculate(int deliveryId, int? product1Id, int amount1, int? product2Id, int amount2, int? product3Id, int amount3, int? product4Id, int amount4)
         {
             if (product1Id == null && product2Id == null && product3Id == null && product4Id == null)
-                throw new Exception("Must provide at least 1 product.");
+                return Result.Fail<decimal>("Must provide at least 1 product.");
 
             var delivery = _deliveryRepository.GetById(deliveryId);
 
@@ -32,7 +33,7 @@ namespace PackageDeliveryNew.Deliveries
             var distance = _addressResolver.GetDistanceTo(delivery.Address);
 
             if (distance == null)
-                throw new Exception("Address is not found.");
+                return Result.Fail<decimal>("Address is not found.");
 
             var productLines = new List<(int? productId, int amount)>
             {
@@ -49,10 +50,9 @@ namespace PackageDeliveryNew.Deliveries
             if (productLines.Any(p => p.Product == null))
                 throw new Exception("One of the products is not found.");
 
-            return delivery.GetEstimate(distance.Value, productLines);
+            var estimate = delivery.GetEstimate(distance.Value, productLines);
 
-
-            return 0;
+            return Result.Ok(estimate);
         }
     }
 
