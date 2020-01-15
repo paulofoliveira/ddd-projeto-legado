@@ -1,10 +1,12 @@
 ﻿using PackageDelivery.Common;
+using PackageDeliveryNew.Deliveries;
 
 namespace PackageDelivery.Delivery
 {
     public class EditPackageViewModel : ViewModel
     {
         private readonly Dlvr _delivery;
+        private readonly EstimateCalculator _estimateCalculator;
 
         private Prdct _product1;
         public string Product1Name => _product1 == null ? string.Empty : _product1.NM_CLM;
@@ -39,6 +41,8 @@ namespace PackageDelivery.Delivery
         public EditPackageViewModel(Dlvr delivery)
         {
             _delivery = delivery;
+            _estimateCalculator = new EstimateCalculator();
+
             _product1 = _delivery.PRD_LN_1 == null ? null : DBHelper.GetProduct(_delivery.PRD_LN_1.Value);
             _product2 = _delivery.PRD_LN_2 == null ? null : DBHelper.GetProduct(_delivery.PRD_LN_2.Value);
             _product3 = _delivery.PRD_LN_3 == null ? null : DBHelper.GetProduct(_delivery.PRD_LN_3.Value);
@@ -60,7 +64,10 @@ namespace PackageDelivery.Delivery
 
         private void RecalculateCost()
         {
-            CostEstimate = (Amount1 + Amount2 + Amount3 + Amount4) * 40;
+            //CostEstimate = (Amount1 + Amount2 + Amount3 + Amount4) * 40;
+
+            CostEstimate = (double)_estimateCalculator.Calculate(_delivery.NMB_CLM, _product1?.NMB_CM, Amount1, _product2?.NMB_CM, Amount2, _product3?.NMB_CM, Amount3, _product4?.NMB_CM, Amount4);
+
             Notify(nameof(CostEstimate));
         }
 

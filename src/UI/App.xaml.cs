@@ -1,4 +1,5 @@
 ﻿using PackageDelivery.Delivery;
+using PackageDeliveryNew.Utils;
 
 namespace PackageDelivery
 {
@@ -6,7 +7,10 @@ namespace PackageDelivery
     {
         public App()
         {
-            DBHelper.Init(@"Server=(localdb)\MSSQLLocalDB;Database=DDDLegacyProjects;Trusted_Connection=true;");
+            var connectionString = @"Server=(localdb)\MSSQLLocalDB;Database=DDDLegacyProjects;Trusted_Connection=true;";
+
+            DBHelper.Init(connectionString);
+            Settings.Init(connectionString);
         }
     }
 }
