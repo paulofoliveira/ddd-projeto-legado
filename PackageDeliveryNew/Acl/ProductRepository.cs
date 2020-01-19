@@ -23,7 +23,8 @@ namespace PackageDeliveryNew.Acl
 
             var weightInPounds = legacy.WT ?? legacy.WT_KG.Value * PoundsInKilogram;
 
-            return new Product(legacy.NMB_CM, weightInPounds);
+            //return new Product(legacy.NMB_CM, weightInPounds);
+            return null;
         }
 
         private ProductLegacy GetLegacyProduct(int id)

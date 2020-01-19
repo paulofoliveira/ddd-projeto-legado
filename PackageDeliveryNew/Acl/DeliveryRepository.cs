@@ -26,7 +26,8 @@ namespace PackageDeliveryNew.Acl
 
             var address = new Address((legacy.STR ?? string.Empty).Trim(), cityAndState[0].Trim(), cityAndState[1].Trim(), (legacy.ZP ?? string.Empty).Trim());
 
-            return new Delivery(legacy.NMB_CM, address);
+            //return new Delivery(legacy.NMB_CM, address);
+            return null;
         }
 
         private DeliveryLegacy GetDeliveryLegacy(int id)

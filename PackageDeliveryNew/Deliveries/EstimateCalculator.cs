@@ -22,37 +22,38 @@ namespace PackageDeliveryNew.Deliveries
         }
         public Result<decimal> Calculate(int deliveryId, int? product1Id, int amount1, int? product2Id, int amount2, int? product3Id, int amount3, int? product4Id, int amount4)
         {
-            if (product1Id == null && product2Id == null && product3Id == null && product4Id == null)
-                return Result.Fail<decimal>("Must provide at least 1 product.");
+            //if (product1Id == null && product2Id == null && product3Id == null && product4Id == null)
+            //    return Result.Fail<decimal>("Must provide at least 1 product.");
 
-            var delivery = _deliveryRepository.GetById(deliveryId);
+            //var delivery = _deliveryRepository.GetById(deliveryId);
 
-            if (delivery == null)
-                throw new Exception($"Delivery is not found for Id: {deliveryId}");
+            //if (delivery == null)
+            //    throw new Exception($"Delivery is not found for Id: {deliveryId}");
 
-            var distance = _addressResolver.GetDistanceTo(delivery.Address);
+            //var distance = _addressResolver.GetDistanceTo(delivery.Destination);
 
-            if (distance == null)
-                return Result.Fail<decimal>("Address is not found.");
+            //if (distance == null)
+            //    return Result.Fail<decimal>("Address is not found.");
 
-            var productLines = new List<(int? productId, int amount)>
-            {
-                (product1Id, amount1),
-                (product2Id, amount2),
-                (product3Id, amount3),
-                (product4Id, amount4)
-            }
-            .Where(p => p.productId != null)
-            .Select(p => new ProductLine(_productRepository.GetById(p.productId.Value), p.amount))
-            .ToList();
+            //var productLines = new List<(int? productId, int amount)>
+            //{
+            //    (product1Id, amount1),
+            //    (product2Id, amount2),
+            //    (product3Id, amount3),
+            //    (product4Id, amount4)
+            //}
+            //.Where(p => p.productId != null)
+            //.Select(p => new ProductLine(_productRepository.GetById(p.productId.Value), p.amount))
+            //.ToList();
 
 
-            if (productLines.Any(p => p.Product == null))
-                throw new Exception("One of the products is not found.");
+            //if (productLines.Any(p => p.Product == null))
+            //    throw new Exception("One of the products is not found.");
 
-            var estimate = delivery.GetEstimate(distance.Value, productLines);
+            //var estimate = delivery.GetEstimate(distance.Value, productLines);
 
-            return Result.Ok(estimate);
+            //return Result.Ok(estimate);
+            return Result.Ok(0m);
         }
     }
 
