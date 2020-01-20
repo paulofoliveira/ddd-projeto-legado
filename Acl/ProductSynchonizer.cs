@@ -2,7 +2,7 @@
 
 namespace Acl
 {
-    public class ProductSynchornizer
+    public class ProductSynchonizer
     {
         public void Sync()
         {

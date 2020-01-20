@@ -16,7 +16,7 @@ namespace Acl
         private static DeliverySynchronizer _deliverySynchonizer;
 
         private static Task _productSyncThread;
-        private static ProductSynchornizer _productSynchonizer;
+        private static ProductSynchonizer _productSynchonizer;
 
         private static CancellationTokenSource _cancellationTokenSource;
         static void Main(string[] args)
@@ -26,7 +26,7 @@ namespace Acl
             _deliverySynchonizer = new DeliverySynchronizer(LegacyConnectionString, BubbleConnectionString);
             _deliverySyncThread = new Task(() => Sync(_deliverySynchonizer.Sync, IntervalBetweenDeliverySyncs), TaskCreationOptions.LongRunning);
 
-            _productSynchonizer = new ProductSynchornizer();
+            _productSynchonizer = new ProductSynchonizer();
             _productSyncThread = new Task(() => Sync(_productSynchonizer.Sync, IntervalBetweenProductSyncs), TaskCreationOptions.LongRunning);
 
             _deliverySyncThread.Start();

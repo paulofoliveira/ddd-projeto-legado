@@ -50,7 +50,7 @@
     <Compile Include="DeliveryLegacy.cs" />
     <Compile Include="DeliverySynchronizer.cs" />
     <Compile Include="ProductLineBubble.cs" />
-    <Compile Include="ProductSynchornizer.cs" />
+    <Compile Include="ProductSynchonizer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
