@@ -12,11 +12,9 @@ Então, temos como conclusão que a entropia do software sempre cresce, o códig
 Questões sobre refatoração, quando refatorar e em que situações. Uma frase interessante do Eric Evans sobre:
 "Keep everthing well-design is the enemy of good design". Refatoração é essencial, mas precisa ser estratégico. Fato!
 
-ACL - Camada anti-corrupção que é usada para "separar" o modelo de domínio do código legado. Temos uma "Bubble" dentro de um projeto legado. Este projeto precisa de comunicação com o modelo atual de alguma forma, e é ai que entra a camada anti-corrupção.
+ACL - Camada anti-corrupção que é usada para "separar" o modelo de domínio do código legado. Temos uma "Bubble" dentro de um projeto legado. Este projeto precisa de comunicação com o modelo atual de alguma forma, e é ai que entra a camada anti-corrupção. A "bolha" não conhece nada sobre o legado. Conversa com a ACL que usa linguagem ubíqua do DDD e executa toda a tradução para o legacy mode.
 
-A "bolha" não conhece nada sobre o legado. Conversa com a ACL que usa linguagem ubíqua do DDD e executa toda a tradução para o legacy mode.
-
-Há muitos outros aprendizados durante o curso, sobre conceitos do DDD (Objetos de valor, entidades e agregados), Validações de erros (Validation Erros vs Preconditions) e contratos de código (Code Contracts),
+Há muitos outros aprendizados durante o curso, sobre conceitos do DDD (Objetos de valor, entidades e agregados), Validações de erros (Validation Erros vs Preconditions) e contratos de código (Code Contracts).
 
 Tornando a camada bolha autônoma com storage separada e criando uma comunicação entre a "nova camada" e o modelo atual com uma ACL, agora em contexto próprio como um serviço Windows, por exemplo. Há necessidades neste caso de estratégias de sincronização de dados e melhor análise do fluxo e do tempo para atualização dos dados.
 
